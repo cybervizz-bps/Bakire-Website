@@ -1,0 +1,1421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>bAKIRE Food Truck | Matcha, Coffee & Pancakes | Pharr, TX</title>
+    <meta name="description" content="bAKIRE Food Truck in Pharr, TX serving handcrafted matcha, specialty coffee, and build-your-own pancake treats. Open Wed-Sun 3pm-9pm.">
+    <meta name="keywords" content="bAKIRE, food truck, matcha, coffee, pancakes, Pharr TX, Rio Grande Valley, RGV food truck">
+    <meta property="og:title" content="bAKIRE Food Truck | Matcha, Coffee & Pancakes">
+    <meta property="og:description" content="Handcrafted matcha, specialty coffee & build-your-own pancakes in Pharr, TX. Open Wed-Sun 3pm-9pm.">
+    <meta property="og:type" content="website">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Caveat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --green-light: #d4e8c2;
+            --green-main: #8cb86b;
+            --green-dark: #4a7c3f;
+            --green-darker: #2d5a27;
+            --cream: #faf9f4;
+            --cream-dark: #f0edd9;
+            --text-dark: #2c2c2c;
+            --text-mid: #5a5a5a;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-dark);
+            background: var(--cream);
+            overflow-x: hidden;
+        }
+
+        /* ── NAV ── */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(250, 249, 244, 0.92);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(140, 184, 107, 0.15);
+            transition: box-shadow 0.3s;
+        }
+
+        nav.scrolled {
+            box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+        }
+
+        .nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem 2rem;
+        }
+
+        .nav-logo {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--green-dark);
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+
+        .nav-logo span {
+            color: var(--green-main);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-mid);
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-links a:hover {
+            color: var(--green-dark);
+        }
+
+        .nav-cta {
+            background: var(--green-dark) !important;
+            color: var(--white) !important;
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.85rem !important;
+            transition: background 0.3s, transform 0.2s !important;
+        }
+
+        .nav-cta:hover {
+            background: var(--green-darker) !important;
+            transform: translateY(-1px);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 4px;
+        }
+
+        .hamburger span {
+            width: 26px;
+            height: 2.5px;
+            background: var(--green-dark);
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
+
+        /* ── HERO ── */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 8rem 2rem 4rem;
+            background: linear-gradient(135deg, var(--cream) 0%, var(--green-light) 50%, #c5ddb0 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(140,184,107,0.2) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(212,232,194,0.4) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 700px;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(74, 124, 63, 0.12);
+            color: var(--green-dark);
+            padding: 0.4rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            font-weight: 800;
+            line-height: 1.05;
+            color: var(--green-darker);
+            margin-bottom: 0.5rem;
+        }
+
+        .hero h1 .accent {
+            font-family: 'Caveat', cursive;
+            color: var(--green-dark);
+            font-size: 3.5rem;
+            display: block;
+            font-weight: 600;
+        }
+
+        .hero-tagline {
+            font-size: 1.2rem;
+            color: var(--text-mid);
+            margin-bottom: 2rem;
+            font-weight: 300;
+            line-height: 1.6;
+        }
+
+        .hero-hours {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--white);
+            padding: 0.6rem 1.4rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            color: var(--green-dark);
+            font-weight: 500;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+            margin-bottom: 2.5rem;
+        }
+
+        .hero-hours .dot {
+            width: 8px;
+            height: 8px;
+            background: #4caf50;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.85rem 2rem;
+            border-radius: 50px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--green-dark);
+            color: var(--white);
+            box-shadow: 0 4px 15px rgba(74, 124, 63, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: var(--green-darker);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(74, 124, 63, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--green-dark);
+            border: 2px solid var(--green-dark);
+        }
+
+        .btn-outline:hover {
+            background: var(--green-dark);
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+
+        /* ── SECTIONS ── */
+        section {
+            padding: 5rem 2rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3.5rem;
+        }
+
+        .section-label {
+            font-family: 'Caveat', cursive;
+            font-size: 1.3rem;
+            color: var(--green-main);
+            margin-bottom: 0.3rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--green-darker);
+        }
+
+        .section-subtitle {
+            color: var(--text-mid);
+            font-weight: 300;
+            margin-top: 0.5rem;
+            font-size: 1.05rem;
+        }
+
+        /* ── MENU ── */
+        #menu {
+            background: var(--white);
+        }
+
+        .menu-container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .menu-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .menu-tab {
+            padding: 0.6rem 1.5rem;
+            border-radius: 50px;
+            border: 2px solid var(--green-light);
+            background: transparent;
+            color: var(--text-mid);
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .menu-tab.active, .menu-tab:hover {
+            background: var(--green-dark);
+            border-color: var(--green-dark);
+            color: var(--white);
+        }
+
+        .menu-panel {
+            display: none;
+        }
+
+        .menu-panel.active {
+            display: block;
+            animation: fadeIn 0.4s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .menu-category {
+            background: var(--cream);
+            border-radius: 16px;
+            padding: 2rem;
+        }
+
+        .menu-category h3 {
+            font-size: 1.2rem;
+            color: var(--green-dark);
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 2px solid var(--green-light);
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            padding: 0.6rem 0;
+        }
+
+        .menu-item-name {
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .menu-item-note {
+            font-size: 0.8rem;
+            color: var(--text-mid);
+            font-weight: 300;
+        }
+
+        .menu-item-price {
+            font-weight: 600;
+            color: var(--green-dark);
+            font-size: 0.95rem;
+            white-space: nowrap;
+            margin-left: 1rem;
+        }
+
+        .menu-extras {
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px dashed var(--green-light);
+        }
+
+        .menu-extras-title {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--green-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .menu-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+        }
+
+        .menu-tag {
+            background: var(--white);
+            padding: 0.3rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            color: var(--text-mid);
+            border: 1px solid var(--green-light);
+        }
+
+        .menu-note {
+            text-align: center;
+            margin-top: 2rem;
+            color: var(--text-mid);
+            font-size: 0.85rem;
+            font-style: italic;
+        }
+
+        /* ── ABOUT ── */
+        #about {
+            background: var(--cream);
+        }
+
+        .about-grid {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-visual {
+            position: relative;
+        }
+
+        .about-card {
+            background: linear-gradient(135deg, var(--green-light), #b8d9a0);
+            border-radius: 24px;
+            padding: 3rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-card::before {
+            content: '';
+            position: absolute;
+            top: -30px;
+            right: -30px;
+            width: 120px;
+            height: 120px;
+            background: rgba(255,255,255,0.15);
+            border-radius: 50%;
+        }
+
+        .about-logo {
+            font-size: 5rem;
+            font-weight: 800;
+            color: var(--white);
+            line-height: 1;
+            margin-bottom: 0.5rem;
+            position: relative;
+        }
+
+        .about-logo-sub {
+            font-family: 'Caveat', cursive;
+            font-size: 1.4rem;
+            color: var(--white);
+            opacity: 0.9;
+        }
+
+        .about-text h3 {
+            font-size: 1.8rem;
+            color: var(--green-darker);
+            margin-bottom: 1rem;
+        }
+
+        .about-text p {
+            color: var(--text-mid);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+            font-weight: 300;
+        }
+
+        .about-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .about-detail {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .about-detail-icon {
+            width: 36px;
+            height: 36px;
+            background: var(--green-light);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+
+        .about-detail-text {
+            font-size: 0.85rem;
+        }
+
+        .about-detail-label {
+            color: var(--text-mid);
+            font-weight: 300;
+            font-size: 0.75rem;
+        }
+
+        .about-detail-value {
+            font-weight: 600;
+            color: var(--green-darker);
+        }
+
+        /* ── LOCATION ── */
+        #location {
+            background: var(--white);
+        }
+
+        .location-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .location-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: stretch;
+        }
+
+        .location-map {
+            border-radius: 16px;
+            overflow: hidden;
+            min-height: 350px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        .location-map iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            min-height: 350px;
+        }
+
+        .location-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+
+        .location-card {
+            background: var(--cream);
+            border-radius: 16px;
+            padding: 1.5rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .location-icon {
+            width: 44px;
+            height: 44px;
+            background: var(--green-light);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .location-card h4 {
+            font-size: 0.95rem;
+            color: var(--green-darker);
+            margin-bottom: 0.2rem;
+        }
+
+        .location-card p {
+            font-size: 0.9rem;
+            color: var(--text-mid);
+            font-weight: 300;
+            line-height: 1.5;
+        }
+
+        .location-directions {
+            margin-top: 0.5rem;
+        }
+
+        /* ── CONTACT ── */
+        #contact {
+            background: linear-gradient(135deg, var(--green-light) 0%, #c5ddb0 100%);
+        }
+
+        .contact-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-form {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+        }
+
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-dark);
+            margin-bottom: 0.4rem;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid var(--cream-dark);
+            border-radius: 12px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.9rem;
+            color: var(--text-dark);
+            background: var(--cream);
+            transition: border-color 0.3s;
+            outline: none;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: var(--green-main);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .form-submit {
+            width: 100%;
+            padding: 0.9rem;
+            background: var(--green-dark);
+            color: var(--white);
+            border: none;
+            border-radius: 12px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 0.5rem;
+        }
+
+        .form-submit:hover {
+            background: var(--green-darker);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 15px rgba(74, 124, 63, 0.3);
+        }
+
+        .form-note {
+            text-align: center;
+            margin-top: 1rem;
+            font-size: 0.8rem;
+            color: var(--text-mid);
+        }
+
+        /* ── INSTAGRAM ── */
+        #instagram {
+            background: var(--cream);
+            text-align: center;
+        }
+
+        .insta-grid {
+            max-width: 800px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+
+        .insta-placeholder {
+            aspect-ratio: 1;
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .insta-placeholder:hover {
+            transform: scale(1.03);
+        }
+
+        .insta-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .insta-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(74, 124, 63, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+            color: var(--white);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .insta-placeholder:hover .insta-overlay {
+            opacity: 1;
+        }
+
+        .insta-follow {
+            margin-top: 2.5rem;
+        }
+
+        /* ── FOOTER ── */
+        footer {
+            background: var(--green-darker);
+            color: rgba(255,255,255,0.7);
+            padding: 3rem 2rem;
+        }
+
+        .footer-inner {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .footer-brand {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--white);
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-tagline {
+            font-family: 'Caveat', cursive;
+            font-size: 1.1rem;
+            color: var(--green-light);
+            margin-bottom: 1rem;
+        }
+
+        footer h4 {
+            color: var(--white);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            letter-spacing: 0.5px;
+        }
+
+        .footer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .footer-links a {
+            color: rgba(255,255,255,0.6);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--white);
+        }
+
+        .footer-bottom {
+            max-width: 1000px;
+            margin: 2rem auto 0;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+            font-size: 0.8rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .social-link:hover {
+            background: var(--green-main);
+            transform: translateY(-2px);
+        }
+
+        .social-link svg {
+            width: 18px;
+            height: 18px;
+            fill: white;
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--cream);
+                flex-direction: column;
+                padding: 1.5rem 2rem;
+                gap: 1rem;
+                border-bottom: 1px solid var(--green-light);
+            }
+
+            .nav-links.open {
+                display: flex;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+
+            .hero h1 .accent {
+                font-size: 2.2rem;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .location-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-inner {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .about-details {
+                grid-template-columns: 1fr;
+            }
+
+            .insta-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ── SCROLL ANIMATIONS ── */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- NAV -->
+    <nav id="navbar">
+        <div class="nav-inner">
+            <a href="#" class="nav-logo"><span>b</span>AKIRE</a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#menu">Menu</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#location">Location</a></li>
+                <li><a href="#instagram">Instagram</a></li>
+                <li><a href="#contact" class="nav-cta">Order / Inquire</a></li>
+            </ul>
+            <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero" id="home">
+        <div class="hero-content fade-up">
+            <div class="hero-badge">Pharr, Texas Food Truck</div>
+            <h1>
+                bAKIRE
+                <span class="accent">matcha, coffee & pancakes</span>
+            </h1>
+            <p class="hero-tagline">Handcrafted drinks and build-your-own pancake treats made fresh from our truck — served with love in the Rio Grande Valley.</p>
+            <div class="hero-hours">
+                <span class="dot"></span>
+                Wed – Sun &nbsp;|&nbsp; 3 PM – 9 PM
+            </div>
+            <div class="hero-buttons">
+                <a href="#menu" class="btn btn-primary">View Our Menu</a>
+                <a href="#contact" class="btn btn-outline">Book for Events</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- MENU -->
+    <section id="menu">
+        <div class="menu-container">
+            <div class="section-header fade-up">
+                <div class="section-label">What We Serve</div>
+                <h2 class="section-title">Our Menu</h2>
+                <p class="section-subtitle">Fresh, flavorful, and made to order</p>
+            </div>
+
+            <div class="menu-tabs fade-up">
+                <button class="menu-tab active" data-tab="drinks">Drinks</button>
+                <button class="menu-tab" data-tab="pancakes">Pancakes</button>
+                <button class="menu-tab" data-tab="extras">Beverages & More</button>
+            </div>
+
+            <!-- DRINKS -->
+            <div class="menu-panel active" id="tab-drinks">
+                <div class="menu-grid fade-up">
+                    <div class="menu-category">
+                        <h3>&#9749; Coffee</h3>
+                        <div class="menu-item">
+                            <div><span class="menu-item-name">Iced</span></div>
+                            <span class="menu-item-price">$6.00</span>
+                        </div>
+                        <div class="menu-item">
+                            <div><span class="menu-item-name">Vanilla</span></div>
+                            <span class="menu-item-price">$7.00</span>
+                        </div>
+                        <div class="menu-item">
+                            <div><span class="menu-item-name">Tres Leches</span></div>
+                            <span class="menu-item-price">$7.00</span>
+                        </div>
+                        <div class="menu-item">
+                            <div><span class="menu-item-name">Cookie Butter</span></div>
+                            <span class="menu-item-price">$7.00</span>
+                        </div>
+                        <div class="menu-item">
+                            <div><span class="menu-item-name">Hot Latte</span></div>
+                            <span class="menu-item-price">$6.00</span>
+                        </div>
+                    </div>
+                    <div class="menu-category">
+                        <h3>&#127861; Matcha</h3>
+                        <div class="menu-item">
+                            <div><span class="menu-item-name">Classic</span></div>
+                            <span class="menu-item-price">$7.00</span>
+                        </div>
+                        <div class="menu-item">
+                            <div><span class="menu-item-name">Banana</span></div>
+                            <span class="menu-item-price">$8.00</span>
+                        </div>
+                        <div class="menu-item">
+                            <div><span class="menu-item-name">Vanilla</span></div>
+                            <span class="menu-item-price">$8.00</span>
+                        </div>
+                        <div class="menu-item">
+                            <div><span class="menu-item-name">Cookie Butter</span></div>
+                            <span class="menu-item-price">$8.00</span>
+                        </div>
+                        <div class="menu-item">
+                            <div><span class="menu-item-name">Tres Leches</span></div>
+                            <span class="menu-item-price">$8.00</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="menu-extras fade-up" style="max-width:600px;margin:2rem auto 0;">
+                    <div class="menu-extras-title">Choose Your Milk</div>
+                    <div class="menu-tags">
+                        <span class="menu-tag">Whole</span>
+                        <span class="menu-tag">Almond</span>
+                        <span class="menu-tag">Oat</span>
+                    </div>
+                    <div class="menu-extras-title" style="margin-top:1rem;">Sweeteners</div>
+                    <div class="menu-tags">
+                        <span class="menu-tag">Agave</span>
+                        <span class="menu-tag">Splenda</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PANCAKES -->
+            <div class="menu-panel" id="tab-pancakes">
+                <div class="menu-grid fade-up">
+                    <div class="menu-category">
+                        <h3>&#129374; Build Your Own</h3>
+                        <div class="menu-item">
+                            <div>
+                                <span class="menu-item-name">12 Piece</span>
+                                <div class="menu-item-note">Includes 1 topping & 2 dippings</div>
+                            </div>
+                            <span class="menu-item-price">$7.00</span>
+                        </div>
+                        <div style="margin-top:1.2rem;">
+                            <div class="menu-extras-title">Toppings</div>
+                            <div class="menu-tags">
+                                <span class="menu-tag">Banana</span>
+                                <span class="menu-tag">Strawberry</span>
+                                <span class="menu-tag">M&M's</span>
+                                <span class="menu-tag">Pecans</span>
+                                <span class="menu-tag">Oreo</span>
+                                <span class="menu-tag">Ice Cream (+$1.00)</span>
+                            </div>
+                        </div>
+                        <div style="margin-top:1rem;">
+                            <div class="menu-extras-title">Dippings</div>
+                            <div class="menu-tags">
+                                <span class="menu-tag">Nutella</span>
+                                <span class="menu-tag">Lechera</span>
+                                <span class="menu-tag">Cajeta</span>
+                                <span class="menu-tag">Pistachio</span>
+                                <span class="menu-tag">Maple Syrup</span>
+                            </div>
+                        </div>
+                        <p class="menu-note" style="text-align:left;margin-top:1rem;">Extra topping or dipping +$0.25</p>
+                    </div>
+                    <div class="menu-category">
+                        <h3>&#11088; Specials</h3>
+                        <div class="menu-item">
+                            <span class="menu-item-name">Dubai</span>
+                            <span class="menu-item-price">$8.00</span>
+                        </div>
+                        <div class="menu-item">
+                            <span class="menu-item-name">Tres Leches</span>
+                            <span class="menu-item-price">$8.00</span>
+                        </div>
+                        <div class="menu-item">
+                            <span class="menu-item-name">Churro</span>
+                            <span class="menu-item-price">$8.00</span>
+                        </div>
+                        <div class="menu-item">
+                            <span class="menu-item-name">White Choco Stuffed</span>
+                            <span class="menu-item-price">$8.00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- EXTRAS -->
+            <div class="menu-panel" id="tab-extras">
+                <div class="menu-grid fade-up" style="max-width:400px;margin:0 auto;">
+                    <div class="menu-category">
+                        <h3>&#127866; Beverages</h3>
+                        <div class="menu-item">
+                            <span class="menu-item-name">Water</span>
+                        </div>
+                        <div class="menu-item">
+                            <span class="menu-item-name">Coke</span>
+                        </div>
+                        <div class="menu-item">
+                            <span class="menu-item-name">Coke Zero</span>
+                        </div>
+                        <div class="menu-item">
+                            <span class="menu-item-name">Sprite</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+        <div class="section-header fade-up">
+            <div class="section-label">Our Story</div>
+            <h2 class="section-title">About bAKIRE</h2>
+        </div>
+        <div class="about-grid">
+            <div class="about-visual fade-up">
+                <div class="about-card">
+                    <div class="about-logo">b</div>
+                    <div class="about-logo-sub">food truck</div>
+                </div>
+            </div>
+            <div class="about-text fade-up">
+                <h3>We would love to serve you</h3>
+                <p>bAKIRE is a food truck in Pharr, Texas bringing you handcrafted matcha lattes, specialty coffee, and our signature build-your-own mini pancakes — all made fresh to order with quality ingredients.</p>
+                <p>Whether you're craving a creamy Tres Leches matcha or a plate of warm churro pancakes drizzled in cajeta, we've got something special waiting for you.</p>
+                <div class="about-details">
+                    <div class="about-detail">
+                        <div class="about-detail-icon">&#128197;</div>
+                        <div class="about-detail-text">
+                            <div class="about-detail-label">Days</div>
+                            <div class="about-detail-value">Wed – Sun</div>
+                        </div>
+                    </div>
+                    <div class="about-detail">
+                        <div class="about-detail-icon">&#128336;</div>
+                        <div class="about-detail-text">
+                            <div class="about-detail-label">Hours</div>
+                            <div class="about-detail-value">3 PM – 9 PM</div>
+                        </div>
+                    </div>
+                    <div class="about-detail">
+                        <div class="about-detail-icon">&#128205;</div>
+                        <div class="about-detail-text">
+                            <div class="about-detail-label">Location</div>
+                            <div class="about-detail-value">Pharr, TX</div>
+                        </div>
+                    </div>
+                    <div class="about-detail">
+                        <div class="about-detail-icon">&#128248;</div>
+                        <div class="about-detail-text">
+                            <div class="about-detail-label">Instagram</div>
+                            <div class="about-detail-value">@bakire.tx</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LOCATION -->
+    <section id="location">
+        <div class="location-container">
+            <div class="section-header fade-up">
+                <div class="section-label">Come Visit</div>
+                <h2 class="section-title">Find Us</h2>
+                <p class="section-subtitle">Parked and ready to serve</p>
+            </div>
+            <div class="location-grid fade-up">
+                <div class="location-map">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3585.5!2d-98.1847!3d26.1947!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjbCsDExJzQwLjkiTiA5OMKwMTEnMDQuOSJX!5e0!3m2!1sen!2sus!4v1700000000000"
+                        allowfullscreen=""
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"
+                        title="bAKIRE Food Truck Location">
+                    </iframe>
+                </div>
+                <div class="location-info">
+                    <div class="location-card">
+                        <div class="location-icon">&#128205;</div>
+                        <div>
+                            <h4>Address</h4>
+                            <p>503 W Nolana Loop<br>Pharr, Texas 78577</p>
+                        </div>
+                    </div>
+                    <div class="location-card">
+                        <div class="location-icon">&#128336;</div>
+                        <div>
+                            <h4>Hours</h4>
+                            <p>Wednesday – Sunday<br>3:00 PM – 9:00 PM</p>
+                        </div>
+                    </div>
+                    <div class="location-card">
+                        <div class="location-icon">&#127793;</div>
+                        <div>
+                            <h4>What to Expect</h4>
+                            <p>Fresh matcha, specialty coffee, and build-your-own pancake treats from our green truck!</p>
+                        </div>
+                    </div>
+                    <div class="location-directions">
+                        <a href="https://www.google.com/maps/dir/?api=1&destination=503+W+Nolana+Loop+Pharr+TX+78577" target="_blank" class="btn btn-primary" style="width:100%;justify-content:center;">
+                            Get Directions &rarr;
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- INSTAGRAM -->
+    <section id="instagram">
+        <div class="section-header fade-up">
+            <div class="section-label">Follow Along</div>
+            <h2 class="section-title">@bakire.tx</h2>
+            <p class="section-subtitle">See what's brewing on our Instagram</p>
+        </div>
+        <div class="insta-grid fade-up">
+            <a href="https://www.instagram.com/bakire.tx/" target="_blank" class="insta-placeholder" style="background:linear-gradient(135deg,#8cb86b,#6a9e4f);">
+                <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;color:white;">
+                    <div style="font-size:2.5rem;">&#127861;</div>
+                    <div style="font-weight:600;margin-top:0.5rem;">Matcha</div>
+                </div>
+                <div class="insta-overlay">View on Instagram</div>
+            </a>
+            <a href="https://www.instagram.com/bakire.tx/" target="_blank" class="insta-placeholder" style="background:linear-gradient(135deg,#b8d9a0,#8cb86b);">
+                <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;color:white;">
+                    <div style="font-size:2.5rem;">&#129374;</div>
+                    <div style="font-weight:600;margin-top:0.5rem;">Pancakes</div>
+                </div>
+                <div class="insta-overlay">View on Instagram</div>
+            </a>
+            <a href="https://www.instagram.com/bakire.tx/" target="_blank" class="insta-placeholder" style="background:linear-gradient(135deg,#4a7c3f,#2d5a27);">
+                <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;color:white;">
+                    <div style="font-size:2.5rem;">&#9749;</div>
+                    <div style="font-weight:600;margin-top:0.5rem;">Coffee</div>
+                </div>
+                <div class="insta-overlay">View on Instagram</div>
+            </a>
+        </div>
+        <div class="insta-follow fade-up">
+            <a href="https://www.instagram.com/bakire.tx/" target="_blank" class="btn btn-primary">
+                Follow @bakire.tx on Instagram
+            </a>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+        <div class="contact-container">
+            <div class="section-header fade-up">
+                <div class="section-label">Get in Touch</div>
+                <h2 class="section-title" style="color:var(--green-darker);">Order & Inquiries</h2>
+                <p class="section-subtitle">Catering, events, or just want to say hi?</p>
+            </div>
+            <div class="contact-form fade-up">
+                <form action="https://formsubmit.co/cybervizz@outlook.com" method="POST">
+                    <input type="hidden" name="_subject" value="New inquiry from bAKIRE website">
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="hidden" name="_template" value="table">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" placeholder="Your name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" placeholder="your@email.com" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone <span style="color:var(--text-mid);font-weight:300;">(optional)</span></label>
+                        <input type="tel" id="phone" name="phone" placeholder="(956) 555-0000">
+                    </div>
+                    <div class="form-group">
+                        <label for="type">What's this about?</label>
+                        <select id="type" name="inquiry_type" required>
+                            <option value="" disabled selected>Select one...</option>
+                            <option value="catering">Catering / Event Booking</option>
+                            <option value="large-order">Large Order</option>
+                            <option value="collaboration">Collaboration / Partnership</option>
+                            <option value="question">General Question</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" placeholder="Tell us about your event, order, or question..." required></textarea>
+                    </div>
+                    <button type="submit" class="form-submit">Send Message</button>
+                    <p class="form-note">We'll get back to you as soon as possible!</p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-inner">
+            <div>
+                <div class="footer-brand">bAKIRE</div>
+                <div class="footer-tagline">matcha, coffee & pancakes</div>
+                <p style="font-size:0.9rem;line-height:1.6;">Serving handcrafted drinks and treats from our food truck in Pharr, Texas.</p>
+                <div class="social-links">
+                    <a href="https://www.instagram.com/bakire.tx/" target="_blank" class="social-link" aria-label="Instagram">
+                        <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                    </a>
+                </div>
+            </div>
+            <div>
+                <h4>Quick Links</h4>
+                <ul class="footer-links">
+                    <li><a href="#menu">Menu</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#location">Find Us</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Visit Us</h4>
+                <p style="font-size:0.9rem;line-height:1.8;">
+                    503 W Nolana Loop<br>
+                    Pharr, TX 78577<br><br>
+                    Wed – Sun<br>
+                    3 PM – 9 PM
+                </p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2026 bAKIRE Food Truck. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+        // ── Mobile nav toggle ──
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('open');
+        });
+
+        // Close mobile nav on link click
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => navLinks.classList.remove('open'));
+        });
+
+        // ── Navbar shadow on scroll ──
+        window.addEventListener('scroll', () => {
+            document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 10);
+        });
+
+        // ── Menu tabs ──
+        document.querySelectorAll('.menu-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.menu-tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.menu-panel').forEach(p => p.classList.remove('active'));
+                tab.classList.add('active');
+                document.getElementById('tab-' + tab.dataset.tab).classList.add('active');
+            });
+        });
+
+        // ── Scroll animations ──
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+        // ── Smooth scroll for anchor links ──
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offset = 80;
+                    const top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+                    window.scrollTo({ top, behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
