@@ -387,19 +387,46 @@
         }
 
         .menu-item {
+            display: grid;
+            grid-template-columns: 58px 1fr auto;
+            align-items: center;
+            gap: 0.85rem;
+            padding: 0.7rem 0;
+            border-bottom: 1px dashed rgba(140, 184, 107, 0.22);
+        }
+
+        .menu-item:last-child {
+            border-bottom: none;
+        }
+
+        .menu-item-image {
+            width: 58px;
+            height: 58px;
+            border-radius: 12px;
             display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            padding: 0.6rem 0;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.7rem;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            color: #fff;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+            flex-shrink: 0;
+        }
+
+        .menu-item-content {
+            display: flex;
+            flex-direction: column;
+            gap: 0.15rem;
+            min-width: 0;
         }
 
         .menu-item-name {
-            font-weight: 500;
+            font-weight: 600;
             font-size: 0.95rem;
         }
 
         .menu-item-note {
-            font-size: 0.8rem;
+            font-size: 0.78rem;
             color: var(--text-mid);
             font-weight: 300;
         }
@@ -407,9 +434,627 @@
         .menu-item-price {
             font-weight: 600;
             color: var(--green-dark);
-            font-size: 0.95rem;
+            font-size: 0.88rem;
             white-space: nowrap;
-            margin-left: 1rem;
+        }
+
+        .menu-add-btn {
+            background: var(--green-dark);
+            color: var(--white);
+            border: none;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            font-size: 1.35rem;
+            font-weight: 400;
+            line-height: 1;
+            cursor: pointer;
+            transition: transform 0.2s, background 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 3px 10px rgba(74, 124, 63, 0.35);
+            flex-shrink: 0;
+        }
+
+        .menu-add-btn:hover {
+            background: var(--green-darker);
+            transform: scale(1.1);
+        }
+
+        .menu-add-btn:active {
+            transform: scale(0.92);
+        }
+
+        /* ── CART FAB ── */
+        .cart-fab {
+            position: fixed;
+            bottom: 26px;
+            right: 26px;
+            z-index: 900;
+            background: var(--green-dark);
+            color: var(--white);
+            border: none;
+            border-radius: 50px;
+            padding: 0.85rem 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 8px 28px rgba(74, 124, 63, 0.4);
+            transition: transform 0.3s, opacity 0.3s, background 0.3s, box-shadow 0.3s;
+            transform: translateY(120px);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .cart-fab.visible {
+            transform: translateY(0);
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .cart-fab:hover {
+            background: var(--green-darker);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 34px rgba(74, 124, 63, 0.5);
+        }
+
+        .cart-fab-count {
+            background: var(--white);
+            color: var(--green-dark);
+            border-radius: 50px;
+            padding: 0.05rem 0.55rem;
+            font-size: 0.8rem;
+            font-weight: 700;
+            min-width: 22px;
+            text-align: center;
+        }
+
+        /* ── CART DRAWER ── */
+        .cart-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1100;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+
+        .cart-overlay.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .cart-drawer {
+            position: fixed;
+            top: 0;
+            right: 0;
+            height: 100%;
+            width: 420px;
+            max-width: 100%;
+            background: var(--cream);
+            z-index: 1200;
+            display: flex;
+            flex-direction: column;
+            transform: translateX(100%);
+            transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: -10px 0 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .cart-drawer.open {
+            transform: translateX(0);
+        }
+
+        .cart-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.3rem 1.4rem;
+            background: var(--green-dark);
+            color: var(--white);
+        }
+
+        .cart-header h3 {
+            font-size: 1.15rem;
+            font-weight: 600;
+        }
+
+        .cart-close {
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.8rem;
+            cursor: pointer;
+            line-height: 1;
+            padding: 0;
+        }
+
+        .cart-body {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1rem 1.4rem;
+        }
+
+        .cart-empty {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: var(--text-mid);
+        }
+
+        .cart-empty-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0.4;
+        }
+
+        .cart-line {
+            display: grid;
+            grid-template-columns: 48px 1fr auto;
+            gap: 0.8rem;
+            padding: 0.9rem 0;
+            border-bottom: 1px solid rgba(140, 184, 107, 0.2);
+            align-items: flex-start;
+        }
+
+        .cart-line-image {
+            width: 48px;
+            height: 48px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.35rem;
+            color: #fff;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+        }
+
+        .cart-line-body {
+            min-width: 0;
+        }
+
+        .cart-line-name {
+            font-weight: 600;
+            font-size: 0.92rem;
+            color: var(--text-dark);
+        }
+
+        .cart-line-note {
+            font-size: 0.74rem;
+            color: var(--text-mid);
+            margin-top: 0.2rem;
+            line-height: 1.4;
+        }
+
+        .cart-line-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            margin-top: 0.5rem;
+        }
+
+        .qty-btn {
+            background: var(--white);
+            border: 1.5px solid var(--green-light);
+            color: var(--green-dark);
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.95rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            line-height: 1;
+        }
+
+        .qty-btn:hover {
+            background: var(--green-dark);
+            color: var(--white);
+            border-color: var(--green-dark);
+        }
+
+        .qty-val {
+            font-size: 0.9rem;
+            font-weight: 600;
+            min-width: 18px;
+            text-align: center;
+        }
+
+        .cart-line-remove {
+            background: none;
+            border: none;
+            color: #b85050;
+            cursor: pointer;
+            font-size: 0.75rem;
+            margin-left: 0.5rem;
+            text-decoration: underline;
+            padding: 0;
+        }
+
+        .cart-line-price {
+            font-weight: 600;
+            color: var(--green-dark);
+            font-size: 0.9rem;
+            white-space: nowrap;
+        }
+
+        .cart-footer {
+            background: var(--white);
+            padding: 1.2rem 1.4rem 1.3rem;
+            border-top: 1px solid var(--cream-dark);
+        }
+
+        .cart-total-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            font-size: 1.05rem;
+        }
+
+        .cart-total-row strong {
+            color: var(--green-darker);
+            font-size: 1.25rem;
+        }
+
+        .cart-checkout-btn {
+            width: 100%;
+            padding: 0.9rem;
+            background: var(--green-dark);
+            color: var(--white);
+            border: none;
+            border-radius: 50px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .cart-checkout-btn:hover:not(:disabled) {
+            background: var(--green-darker);
+            transform: translateY(-1px);
+        }
+
+        .cart-checkout-btn:disabled {
+            background: #c8c8c8;
+            cursor: not-allowed;
+        }
+
+        .cart-clear {
+            display: block;
+            margin: 0.7rem auto 0;
+            background: none;
+            border: none;
+            color: var(--text-mid);
+            font-size: 0.8rem;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        /* ── CUSTOMIZE MODAL ── */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 1300;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s;
+            padding: 1rem;
+        }
+
+        .modal-overlay.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal {
+            background: var(--cream);
+            border-radius: 20px;
+            max-width: 460px;
+            width: 100%;
+            max-height: 92vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            transform: scale(0.95);
+            transition: transform 0.25s;
+        }
+
+        .modal-overlay.open .modal {
+            transform: scale(1);
+        }
+
+        .modal-header {
+            padding: 1.1rem 1.4rem;
+            background: var(--green-dark);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-shrink: 0;
+        }
+
+        .modal-header-inner {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .modal-header-image {
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .modal-header h3 {
+            font-size: 1.05rem;
+            font-weight: 600;
+        }
+
+        .modal-header-price {
+            font-size: 0.8rem;
+            opacity: 0.85;
+            font-weight: 400;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.7rem;
+            cursor: pointer;
+            line-height: 1;
+            padding: 0;
+        }
+
+        .modal-body {
+            padding: 1.2rem 1.4rem;
+            overflow-y: auto;
+            flex: 1;
+        }
+
+        .modal-section {
+            margin-bottom: 1.3rem;
+        }
+
+        .modal-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .modal-section-title {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--green-dark);
+            margin-bottom: 0.55rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .modal-section-hint {
+            font-size: 0.72rem;
+            color: var(--text-mid);
+            font-weight: 400;
+            text-transform: none;
+            letter-spacing: 0;
+        }
+
+        .option-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+        }
+
+        .option-chip {
+            padding: 0.45rem 0.95rem;
+            border-radius: 50px;
+            background: var(--white);
+            border: 2px solid var(--cream-dark);
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.82rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+
+        .option-chip:hover:not(.disabled) {
+            border-color: var(--green-main);
+        }
+
+        .option-chip.selected {
+            background: var(--green-dark);
+            border-color: var(--green-dark);
+            color: var(--white);
+        }
+
+        .option-chip.disabled {
+            opacity: 0.45;
+            cursor: not-allowed;
+        }
+
+        .modal-footer {
+            padding: 1rem 1.4rem 1.2rem;
+            border-top: 1px solid var(--cream-dark);
+            background: var(--white);
+            display: flex;
+            gap: 0.6rem;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        .modal-qty {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .modal-add-btn {
+            flex: 1;
+            padding: 0.8rem;
+            background: var(--green-dark);
+            color: var(--white);
+            border: none;
+            border-radius: 50px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .modal-add-btn:hover:not(:disabled) {
+            background: var(--green-darker);
+        }
+
+        .modal-add-btn:disabled {
+            background: #c8c8c8;
+            cursor: not-allowed;
+        }
+
+        /* ── CHECKOUT (in drawer) ── */
+        .checkout-panel {
+            display: none;
+            padding: 1rem 1.4rem;
+            overflow-y: auto;
+            flex: 1;
+        }
+
+        .checkout-panel.active {
+            display: block;
+        }
+
+        .checkout-back {
+            background: none;
+            border: none;
+            color: var(--green-dark);
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 0.8rem;
+            padding: 0;
+            text-decoration: underline;
+        }
+
+        .checkout-panel .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .checkout-panel label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-bottom: 0.3rem;
+            color: var(--text-dark);
+        }
+
+        .checkout-panel input,
+        .checkout-panel select,
+        .checkout-panel textarea {
+            width: 100%;
+            padding: 0.65rem 0.9rem;
+            border: 2px solid var(--cream-dark);
+            border-radius: 10px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.88rem;
+            background: var(--white);
+            outline: none;
+            color: var(--text-dark);
+            transition: border-color 0.3s;
+        }
+
+        .checkout-panel input:focus,
+        .checkout-panel select:focus,
+        .checkout-panel textarea:focus {
+            border-color: var(--green-main);
+        }
+
+        .checkout-panel textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .checkout-summary {
+            background: var(--cream-dark);
+            border-radius: 12px;
+            padding: 0.9rem 1rem;
+            margin-bottom: 1rem;
+            font-size: 0.85rem;
+        }
+
+        .checkout-summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.3rem;
+        }
+
+        .checkout-summary-row:last-child {
+            margin-bottom: 0;
+            padding-top: 0.4rem;
+            border-top: 1px solid rgba(74, 124, 63, 0.2);
+            font-weight: 700;
+            color: var(--green-darker);
+        }
+
+        .cart-thanks {
+            text-align: center;
+            padding: 3rem 1.5rem;
+        }
+
+        .cart-thanks-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .cart-thanks h3 {
+            color: var(--green-darker);
+            margin-bottom: 0.6rem;
+        }
+
+        .cart-thanks p {
+            color: var(--text-mid);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* ── TOAST ── */
+        .toast {
+            position: fixed;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%) translateY(60px);
+            background: var(--green-darker);
+            color: var(--white);
+            padding: 0.8rem 1.4rem;
+            border-radius: 50px;
+            font-size: 0.88rem;
+            font-weight: 500;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+            z-index: 1500;
+            opacity: 0;
+            transition: all 0.3s;
+            pointer-events: none;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
         }
 
         .menu-extras {
@@ -928,6 +1573,34 @@
             .menu-grid {
                 grid-template-columns: 1fr;
             }
+
+            .cart-drawer {
+                width: 100%;
+            }
+
+            .cart-fab {
+                bottom: 18px;
+                right: 18px;
+                padding: 0.7rem 1.05rem;
+                font-size: 0.88rem;
+            }
+
+            .menu-item {
+                grid-template-columns: 52px 1fr auto;
+                gap: 0.7rem;
+            }
+
+            .menu-item-image {
+                width: 52px;
+                height: 52px;
+                font-size: 1.5rem;
+            }
+
+            .menu-add-btn {
+                width: 34px;
+                height: 34px;
+                font-size: 1.25rem;
+            }
         }
 
         /* ── SCROLL ANIMATIONS ── */
@@ -987,13 +1660,13 @@
             <div class="section-header fade-up">
                 <div class="section-label">What We Serve</div>
                 <h2 class="section-title">Our Menu</h2>
-                <p class="section-subtitle">Fresh, flavorful, and made to order</p>
+                <p class="section-subtitle">Fresh, flavorful, and made to order &mdash; tap <strong>+</strong> to start your order</p>
             </div>
 
             <div class="menu-tabs fade-up">
                 <button class="menu-tab active" data-tab="drinks">Drinks</button>
                 <button class="menu-tab" data-tab="pancakes">Pancakes</button>
-                <button class="menu-tab" data-tab="extras">Beverages & More</button>
+                <button class="menu-tab" data-tab="extras">Beverages &amp; More</button>
             </div>
 
             <!-- DRINKS -->
@@ -1001,64 +1674,92 @@
                 <div class="menu-grid fade-up">
                     <div class="menu-category">
                         <h3>&#9749; Coffee</h3>
-                        <div class="menu-item">
-                            <div><span class="menu-item-name">Iced</span></div>
-                            <span class="menu-item-price">$6.00</span>
+                        <div class="menu-item" data-id="coffee-iced" data-name="Iced Coffee" data-price="6" data-emoji="&#129380;" data-gradient="#a87e5a,#5a3a23" data-type="drink">
+                            <div class="menu-item-image" style="background:linear-gradient(135deg,#a87e5a,#5a3a23);">&#129380;</div>
+                            <div class="menu-item-content">
+                                <span class="menu-item-name">Iced</span>
+                                <span class="menu-item-price">$6.00</span>
+                            </div>
+                            <button class="menu-add-btn" type="button" aria-label="Add Iced Coffee to order">+</button>
                         </div>
-                        <div class="menu-item">
-                            <div><span class="menu-item-name">Vanilla</span></div>
-                            <span class="menu-item-price">$7.00</span>
+                        <div class="menu-item" data-id="coffee-vanilla" data-name="Vanilla Coffee" data-price="7" data-emoji="&#9749;" data-gradient="#d4b483,#8c6238" data-type="drink">
+                            <div class="menu-item-image" style="background:linear-gradient(135deg,#d4b483,#8c6238);">&#9749;</div>
+                            <div class="menu-item-content">
+                                <span class="menu-item-name">Vanilla</span>
+                                <span class="menu-item-price">$7.00</span>
+                            </div>
+                            <button class="menu-add-btn" type="button" aria-label="Add Vanilla Coffee to order">+</button>
                         </div>
-                        <div class="menu-item">
-                            <div><span class="menu-item-name">Tres Leches</span></div>
-                            <span class="menu-item-price">$7.00</span>
+                        <div class="menu-item" data-id="coffee-tres-leches" data-name="Tres Leches Coffee" data-price="7" data-emoji="&#129371;" data-gradient="#e8d8c0,#a88560" data-type="drink">
+                            <div class="menu-item-image" style="background:linear-gradient(135deg,#e8d8c0,#a88560);">&#129371;</div>
+                            <div class="menu-item-content">
+                                <span class="menu-item-name">Tres Leches</span>
+                                <span class="menu-item-price">$7.00</span>
+                            </div>
+                            <button class="menu-add-btn" type="button" aria-label="Add Tres Leches Coffee to order">+</button>
                         </div>
-                        <div class="menu-item">
-                            <div><span class="menu-item-name">Cookie Butter</span></div>
-                            <span class="menu-item-price">$7.00</span>
+                        <div class="menu-item" data-id="coffee-cookie-butter" data-name="Cookie Butter Coffee" data-price="7" data-emoji="&#127850;" data-gradient="#c08858,#7a4a25" data-type="drink">
+                            <div class="menu-item-image" style="background:linear-gradient(135deg,#c08858,#7a4a25);">&#127850;</div>
+                            <div class="menu-item-content">
+                                <span class="menu-item-name">Cookie Butter</span>
+                                <span class="menu-item-price">$7.00</span>
+                            </div>
+                            <button class="menu-add-btn" type="button" aria-label="Add Cookie Butter Coffee to order">+</button>
                         </div>
-                        <div class="menu-item">
-                            <div><span class="menu-item-name">Hot Latte</span></div>
-                            <span class="menu-item-price">$6.00</span>
+                        <div class="menu-item" data-id="coffee-hot-latte" data-name="Hot Latte" data-price="6" data-emoji="&#9749;" data-gradient="#8b5e3c,#3a2010" data-type="drink">
+                            <div class="menu-item-image" style="background:linear-gradient(135deg,#8b5e3c,#3a2010);">&#9749;</div>
+                            <div class="menu-item-content">
+                                <span class="menu-item-name">Hot Latte</span>
+                                <span class="menu-item-price">$6.00</span>
+                            </div>
+                            <button class="menu-add-btn" type="button" aria-label="Add Hot Latte to order">+</button>
                         </div>
                     </div>
                     <div class="menu-category">
                         <h3>&#127861; Matcha</h3>
-                        <div class="menu-item">
-                            <div><span class="menu-item-name">Classic</span></div>
-                            <span class="menu-item-price">$7.00</span>
+                        <div class="menu-item" data-id="matcha-classic" data-name="Classic Matcha" data-price="7" data-emoji="&#127861;" data-gradient="#9bc676,#3e6b35" data-type="drink">
+                            <div class="menu-item-image" style="background:linear-gradient(135deg,#9bc676,#3e6b35);">&#127861;</div>
+                            <div class="menu-item-content">
+                                <span class="menu-item-name">Classic</span>
+                                <span class="menu-item-price">$7.00</span>
+                            </div>
+                            <button class="menu-add-btn" type="button" aria-label="Add Classic Matcha to order">+</button>
                         </div>
-                        <div class="menu-item">
-                            <div><span class="menu-item-name">Banana</span></div>
-                            <span class="menu-item-price">$8.00</span>
+                        <div class="menu-item" data-id="matcha-banana" data-name="Banana Matcha" data-price="8" data-emoji="&#127820;" data-gradient="#dfe38b,#8cb86b" data-type="drink">
+                            <div class="menu-item-image" style="background:linear-gradient(135deg,#dfe38b,#8cb86b);">&#127820;</div>
+                            <div class="menu-item-content">
+                                <span class="menu-item-name">Banana</span>
+                                <span class="menu-item-price">$8.00</span>
+                            </div>
+                            <button class="menu-add-btn" type="button" aria-label="Add Banana Matcha to order">+</button>
                         </div>
-                        <div class="menu-item">
-                            <div><span class="menu-item-name">Vanilla</span></div>
-                            <span class="menu-item-price">$8.00</span>
+                        <div class="menu-item" data-id="matcha-vanilla" data-name="Vanilla Matcha" data-price="8" data-emoji="&#127861;" data-gradient="#cde0a8,#7aa85e" data-type="drink">
+                            <div class="menu-item-image" style="background:linear-gradient(135deg,#cde0a8,#7aa85e);">&#127861;</div>
+                            <div class="menu-item-content">
+                                <span class="menu-item-name">Vanilla</span>
+                                <span class="menu-item-price">$8.00</span>
+                            </div>
+                            <button class="menu-add-btn" type="button" aria-label="Add Vanilla Matcha to order">+</button>
                         </div>
-                        <div class="menu-item">
-                            <div><span class="menu-item-name">Cookie Butter</span></div>
-                            <span class="menu-item-price">$8.00</span>
+                        <div class="menu-item" data-id="matcha-cookie-butter" data-name="Cookie Butter Matcha" data-price="8" data-emoji="&#127850;" data-gradient="#b5c88a,#5a8c3f" data-type="drink">
+                            <div class="menu-item-image" style="background:linear-gradient(135deg,#b5c88a,#5a8c3f);">&#127850;</div>
+                            <div class="menu-item-content">
+                                <span class="menu-item-name">Cookie Butter</span>
+                                <span class="menu-item-price">$8.00</span>
+                            </div>
+                            <button class="menu-add-btn" type="button" aria-label="Add Cookie Butter Matcha to order">+</button>
                         </div>
-                        <div class="menu-item">
-                            <div><span class="menu-item-name">Tres Leches</span></div>
-                            <span class="menu-item-price">$8.00</span>
+                        <div class="menu-item" data-id="matcha-tres-leches" data-name="Tres Leches Matcha" data-price="8" data-emoji="&#129371;" data-gradient="#dce8c5,#7aa85e" data-type="drink">
+                            <div class="menu-item-image" style="background:linear-gradient(135deg,#dce8c5,#7aa85e);">&#129371;</div>
+                            <div class="menu-item-content">
+                                <span class="menu-item-name">Tres Leches</span>
+                                <span class="menu-item-price">$8.00</span>
+                            </div>
+                            <button class="menu-add-btn" type="button" aria-label="Add Tres Leches Matcha to order">+</button>
                         </div>
                     </div>
                 </div>
-                <div class="menu-extras fade-up" style="max-width:600px;margin:2rem auto 0;">
-                    <div class="menu-extras-title">Choose Your Milk</div>
-                    <div class="menu-tags">
-                        <span class="menu-tag">Whole</span>
-                        <span class="menu-tag">Almond</span>
-                        <span class="menu-tag">Oat</span>
-                    </div>
-                    <div class="menu-extras-title" style="margin-top:1rem;">Sweeteners</div>
-                    <div class="menu-tags">
-                        <span class="menu-tag">Agave</span>
-                        <span class="menu-tag">Splenda</span>
-                    </div>
-                </div>
+                <p class="menu-note" style="margin-top:1.5rem;">Choose your milk (Whole, Almond, Oat) and sweetener (Agave, Splenda) when adding to order.</p>
             </div>
 
             <!-- PANCAKES -->
@@ -1066,53 +1767,50 @@
                 <div class="menu-grid fade-up">
                     <div class="menu-category">
                         <h3>&#129374; Build Your Own</h3>
-                        <div class="menu-item">
-                            <div>
+                        <div class="menu-item" data-id="pancake-byo" data-name="Build Your Own (12 Piece)" data-price="7" data-emoji="&#129374;" data-gradient="#f4c788,#c9842c" data-type="pancake">
+                            <div class="menu-item-image" style="background:linear-gradient(135deg,#f4c788,#c9842c);">&#129374;</div>
+                            <div class="menu-item-content">
                                 <span class="menu-item-name">12 Piece</span>
-                                <div class="menu-item-note">Includes 1 topping & 2 dippings</div>
+                                <span class="menu-item-note">1 topping &amp; 2 dippings included</span>
+                                <span class="menu-item-price">$7.00</span>
                             </div>
-                            <span class="menu-item-price">$7.00</span>
+                            <button class="menu-add-btn" type="button" aria-label="Customize Build Your Own pancakes">+</button>
                         </div>
-                        <div style="margin-top:1.2rem;">
-                            <div class="menu-extras-title">Toppings</div>
-                            <div class="menu-tags">
-                                <span class="menu-tag">Banana</span>
-                                <span class="menu-tag">Strawberry</span>
-                                <span class="menu-tag">M&M's</span>
-                                <span class="menu-tag">Pecans</span>
-                                <span class="menu-tag">Oreo</span>
-                                <span class="menu-tag">Ice Cream (+$1.00)</span>
-                            </div>
-                        </div>
-                        <div style="margin-top:1rem;">
-                            <div class="menu-extras-title">Dippings</div>
-                            <div class="menu-tags">
-                                <span class="menu-tag">Nutella</span>
-                                <span class="menu-tag">Lechera</span>
-                                <span class="menu-tag">Cajeta</span>
-                                <span class="menu-tag">Pistachio</span>
-                                <span class="menu-tag">Maple Syrup</span>
-                            </div>
-                        </div>
-                        <p class="menu-note" style="text-align:left;margin-top:1rem;">Extra topping or dipping +$0.25</p>
+                        <p class="menu-note" style="text-align:left;margin-top:1rem;">Pick from Banana, Strawberry, M&amp;M's, Pecans, Oreo, or Ice Cream (+$1.00) for toppings, and Nutella, Lechera, Cajeta, Pistachio, or Maple Syrup for dippings. Extra topping or dipping +$0.25.</p>
                     </div>
                     <div class="menu-category">
                         <h3>&#11088; Specials</h3>
-                        <div class="menu-item">
-                            <span class="menu-item-name">Dubai</span>
-                            <span class="menu-item-price">$8.00</span>
+                        <div class="menu-item" data-id="pancake-dubai" data-name="Dubai Pancakes" data-price="8" data-emoji="&#129374;" data-gradient="#d4a044,#6e5018" data-type="simple">
+                            <div class="menu-item-image" style="background:linear-gradient(135deg,#d4a044,#6e5018);">&#129374;</div>
+                            <div class="menu-item-content">
+                                <span class="menu-item-name">Dubai</span>
+                                <span class="menu-item-price">$8.00</span>
+                            </div>
+                            <button class="menu-add-btn" type="button" aria-label="Add Dubai Pancakes to order">+</button>
                         </div>
-                        <div class="menu-item">
-                            <span class="menu-item-name">Tres Leches</span>
-                            <span class="menu-item-price">$8.00</span>
+                        <div class="menu-item" data-id="pancake-tres-leches" data-name="Tres Leches Pancakes" data-price="8" data-emoji="&#129374;" data-gradient="#f4e4c4,#b89270" data-type="simple">
+                            <div class="menu-item-image" style="background:linear-gradient(135deg,#f4e4c4,#b89270);">&#129374;</div>
+                            <div class="menu-item-content">
+                                <span class="menu-item-name">Tres Leches</span>
+                                <span class="menu-item-price">$8.00</span>
+                            </div>
+                            <button class="menu-add-btn" type="button" aria-label="Add Tres Leches Pancakes to order">+</button>
                         </div>
-                        <div class="menu-item">
-                            <span class="menu-item-name">Churro</span>
-                            <span class="menu-item-price">$8.00</span>
+                        <div class="menu-item" data-id="pancake-churro" data-name="Churro Pancakes" data-price="8" data-emoji="&#129374;" data-gradient="#c88a3e,#6e3a14" data-type="simple">
+                            <div class="menu-item-image" style="background:linear-gradient(135deg,#c88a3e,#6e3a14);">&#129374;</div>
+                            <div class="menu-item-content">
+                                <span class="menu-item-name">Churro</span>
+                                <span class="menu-item-price">$8.00</span>
+                            </div>
+                            <button class="menu-add-btn" type="button" aria-label="Add Churro Pancakes to order">+</button>
                         </div>
-                        <div class="menu-item">
-                            <span class="menu-item-name">White Choco Stuffed</span>
-                            <span class="menu-item-price">$8.00</span>
+                        <div class="menu-item" data-id="pancake-white-choco" data-name="White Choco Stuffed Pancakes" data-price="8" data-emoji="&#127851;" data-gradient="#f4ecd8,#b09368" data-type="simple">
+                            <div class="menu-item-image" style="background:linear-gradient(135deg,#f4ecd8,#b09368);">&#127851;</div>
+                            <div class="menu-item-content">
+                                <span class="menu-item-name">White Choco Stuffed</span>
+                                <span class="menu-item-price">$8.00</span>
+                            </div>
+                            <button class="menu-add-btn" type="button" aria-label="Add White Choco Stuffed Pancakes to order">+</button>
                         </div>
                     </div>
                 </div>
@@ -1120,20 +1818,40 @@
 
             <!-- EXTRAS -->
             <div class="menu-panel" id="tab-extras">
-                <div class="menu-grid fade-up" style="max-width:400px;margin:0 auto;">
+                <div class="menu-grid fade-up" style="max-width:520px;margin:0 auto;">
                     <div class="menu-category">
                         <h3>&#127866; Beverages</h3>
-                        <div class="menu-item">
-                            <span class="menu-item-name">Water</span>
+                        <div class="menu-item" data-id="bev-water" data-name="Water" data-price="2" data-emoji="&#128167;" data-gradient="#9ed1ee,#3a78a8" data-type="simple">
+                            <div class="menu-item-image" style="background:linear-gradient(135deg,#9ed1ee,#3a78a8);">&#128167;</div>
+                            <div class="menu-item-content">
+                                <span class="menu-item-name">Water</span>
+                                <span class="menu-item-price">$2.00</span>
+                            </div>
+                            <button class="menu-add-btn" type="button" aria-label="Add Water to order">+</button>
                         </div>
-                        <div class="menu-item">
-                            <span class="menu-item-name">Coke</span>
+                        <div class="menu-item" data-id="bev-coke" data-name="Coke" data-price="2.5" data-emoji="&#129380;" data-gradient="#c83e3e,#651a1a" data-type="simple">
+                            <div class="menu-item-image" style="background:linear-gradient(135deg,#c83e3e,#651a1a);">&#129380;</div>
+                            <div class="menu-item-content">
+                                <span class="menu-item-name">Coke</span>
+                                <span class="menu-item-price">$2.50</span>
+                            </div>
+                            <button class="menu-add-btn" type="button" aria-label="Add Coke to order">+</button>
                         </div>
-                        <div class="menu-item">
-                            <span class="menu-item-name">Coke Zero</span>
+                        <div class="menu-item" data-id="bev-coke-zero" data-name="Coke Zero" data-price="2.5" data-emoji="&#129380;" data-gradient="#3a3a3a,#0a0a0a" data-type="simple">
+                            <div class="menu-item-image" style="background:linear-gradient(135deg,#3a3a3a,#0a0a0a);">&#129380;</div>
+                            <div class="menu-item-content">
+                                <span class="menu-item-name">Coke Zero</span>
+                                <span class="menu-item-price">$2.50</span>
+                            </div>
+                            <button class="menu-add-btn" type="button" aria-label="Add Coke Zero to order">+</button>
                         </div>
-                        <div class="menu-item">
-                            <span class="menu-item-name">Sprite</span>
+                        <div class="menu-item" data-id="bev-sprite" data-name="Sprite" data-price="2.5" data-emoji="&#129380;" data-gradient="#a8d8a8,#3a8a4a" data-type="simple">
+                            <div class="menu-item-image" style="background:linear-gradient(135deg,#a8d8a8,#3a8a4a);">&#129380;</div>
+                            <div class="menu-item-content">
+                                <span class="menu-item-name">Sprite</span>
+                                <span class="menu-item-price">$2.50</span>
+                            </div>
+                            <button class="menu-add-btn" type="button" aria-label="Add Sprite to order">+</button>
                         </div>
                     </div>
                 </div>
@@ -1284,8 +2002,8 @@
         <div class="contact-container">
             <div class="section-header fade-up">
                 <div class="section-label">Get in Touch</div>
-                <h2 class="section-title" style="color:var(--green-darker);">Order & Inquiries</h2>
-                <p class="section-subtitle">Catering, events, or just want to say hi?</p>
+                <h2 class="section-title" style="color:var(--green-darker);">Catering &amp; Inquiries</h2>
+                <p class="section-subtitle">For pickup orders, use the <strong>+</strong> buttons on the menu. For events, large catering, or general questions, use the form below.</p>
             </div>
             <div class="contact-form fade-up">
                 <form action="https://formsubmit.co/cybervizz@outlook.com" method="POST">
@@ -1365,6 +2083,103 @@
         </div>
     </footer>
 
+    <!-- ORDER CART -->
+    <button class="cart-fab" id="cartFab" type="button" aria-label="View order cart">
+        <span class="cart-fab-icon" aria-hidden="true">&#128722;</span>
+        <span>Your Order</span>
+        <span class="cart-fab-count" id="cartFabCount">0</span>
+    </button>
+
+    <div class="cart-overlay" id="cartOverlay"></div>
+
+    <aside class="cart-drawer" id="cartDrawer" aria-label="Your order">
+        <div class="cart-header">
+            <h3 id="cartTitle">Your Order</h3>
+            <button class="cart-close" id="cartClose" type="button" aria-label="Close cart">&times;</button>
+        </div>
+
+        <div class="cart-body" id="cartBody">
+            <!-- populated by JS -->
+        </div>
+
+        <div class="checkout-panel" id="checkoutPanel">
+            <button class="checkout-back" id="checkoutBack" type="button">&larr; Back to cart</button>
+            <h4 style="color:var(--green-darker);margin-bottom:0.8rem;font-size:1rem;">Pickup Details</h4>
+            <form id="checkoutForm" action="https://formsubmit.co/cybervizz@outlook.com" method="POST">
+                <input type="hidden" name="_subject" value="New online order from bAKIRE website">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_template" value="table">
+                <input type="hidden" name="order_summary" id="orderSummaryField">
+                <input type="hidden" name="order_total" id="orderTotalField">
+                <div class="form-group">
+                    <label for="co-name">Name</label>
+                    <input type="text" id="co-name" name="name" placeholder="Your name" required>
+                </div>
+                <div class="form-group">
+                    <label for="co-phone">Phone</label>
+                    <input type="tel" id="co-phone" name="phone" placeholder="(956) 555-0000" required>
+                </div>
+                <div class="form-group">
+                    <label for="co-pickup">Pickup time</label>
+                    <select id="co-pickup" name="pickup_time" required>
+                        <option value="" disabled selected>Choose a time...</option>
+                        <option value="ASAP">As soon as possible</option>
+                        <option value="15 min">In 15 minutes</option>
+                        <option value="30 min">In 30 minutes</option>
+                        <option value="45 min">In 45 minutes</option>
+                        <option value="1 hour">In 1 hour</option>
+                        <option value="Other">Other (write in notes)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="co-notes">Notes <span style="color:var(--text-mid);font-weight:300;">(optional)</span></label>
+                    <textarea id="co-notes" name="notes" placeholder="Any special requests..."></textarea>
+                </div>
+                <div class="checkout-summary" id="checkoutSummary"></div>
+                <button type="submit" class="cart-checkout-btn">Place Order</button>
+                <p class="form-note" style="text-align:center;margin-top:0.7rem;">We'll text you to confirm. Pay at pickup.</p>
+            </form>
+        </div>
+
+        <div class="cart-footer" id="cartFooter">
+            <div class="cart-total-row">
+                <span>Total</span>
+                <strong id="cartTotal">$0.00</strong>
+            </div>
+            <button class="cart-checkout-btn" id="cartCheckoutBtn" type="button" disabled>Checkout</button>
+            <button class="cart-clear" id="cartClearBtn" type="button">Clear cart</button>
+        </div>
+    </aside>
+
+    <!-- CUSTOMIZE MODAL -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+            <div class="modal-header">
+                <div class="modal-header-inner">
+                    <div class="modal-header-image" id="modalImage" aria-hidden="true">&#9749;</div>
+                    <div>
+                        <h3 id="modalTitle">Customize</h3>
+                        <div class="modal-header-price" id="modalSubtitle">$0.00</div>
+                    </div>
+                </div>
+                <button class="modal-close" id="modalClose" type="button" aria-label="Close customize">&times;</button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- populated by JS -->
+            </div>
+            <div class="modal-footer">
+                <div class="modal-qty">
+                    <button class="qty-btn" id="modalQtyMinus" type="button" aria-label="Decrease quantity">&minus;</button>
+                    <span class="qty-val" id="modalQtyVal">1</span>
+                    <button class="qty-btn" id="modalQtyPlus" type="button" aria-label="Increase quantity">+</button>
+                </div>
+                <button class="modal-add-btn" id="modalAddBtn" type="button">Add to Order &mdash; $0.00</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
     <script>
         // ── Mobile nav toggle ──
         const hamburger = document.getElementById('hamburger');
@@ -1417,6 +2232,476 @@
                 }
             });
         });
+
+        // ─────────────────────────────────────────────
+        // ── ONLINE ORDERING ──
+        // ─────────────────────────────────────────────
+        const STORAGE_KEY = 'bakire_cart_v1';
+        const ICE_CREAM_UPCHARGE = 1.00;
+        const EXTRA_TOPPING_PRICE = 0.25;
+        const PANCAKE_INCLUDED_TOPPINGS = 1;
+        const PANCAKE_INCLUDED_DIPPINGS = 2;
+
+        const MILK_OPTIONS = ['Whole', 'Almond', 'Oat'];
+        const SWEETENER_OPTIONS = ['None', 'Agave', 'Splenda'];
+        const TOPPING_OPTIONS = [
+            { name: 'Banana', extra: 0 },
+            { name: 'Strawberry', extra: 0 },
+            { name: "M&M's", extra: 0 },
+            { name: 'Pecans', extra: 0 },
+            { name: 'Oreo', extra: 0 },
+            { name: 'Ice Cream', extra: ICE_CREAM_UPCHARGE }
+        ];
+        const DIPPING_OPTIONS = ['Nutella', 'Lechera', 'Cajeta', 'Pistachio', 'Maple Syrup'];
+
+        let cart = loadCart();
+        let modalState = null; // { item, qty, milk, sweetener, toppings: [], dippings: [] }
+
+        // ── Storage ──
+        function loadCart() {
+            try {
+                const raw = localStorage.getItem(STORAGE_KEY);
+                return raw ? JSON.parse(raw) : [];
+            } catch (e) {
+                return [];
+            }
+        }
+
+        function saveCart() {
+            try {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(cart));
+            } catch (e) { /* ignore */ }
+        }
+
+        // ── Utilities ──
+        function fmt(n) { return '$' + Number(n).toFixed(2); }
+
+        function uid() {
+            return Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
+        }
+
+        function showToast(msg) {
+            const t = document.getElementById('toast');
+            t.textContent = msg;
+            t.classList.add('show');
+            clearTimeout(showToast._t);
+            showToast._t = setTimeout(() => t.classList.remove('show'), 2200);
+        }
+
+        function calcLinePrice(line) {
+            let p = Number(line.price);
+            if (line.toppings) {
+                line.toppings.forEach((t, i) => {
+                    const def = TOPPING_OPTIONS.find(o => o.name === t);
+                    if (def && def.extra) p += def.extra;
+                    if (i >= PANCAKE_INCLUDED_TOPPINGS) p += EXTRA_TOPPING_PRICE;
+                });
+            }
+            if (line.dippings) {
+                line.dippings.forEach((d, i) => {
+                    if (i >= PANCAKE_INCLUDED_DIPPINGS) p += EXTRA_TOPPING_PRICE;
+                });
+            }
+            return p * line.qty;
+        }
+
+        function cartTotal() {
+            return cart.reduce((sum, line) => sum + calcLinePrice(line), 0);
+        }
+
+        function cartItemCount() {
+            return cart.reduce((sum, line) => sum + line.qty, 0);
+        }
+
+        function describeOptions(line) {
+            const parts = [];
+            if (line.milk) parts.push(line.milk + ' milk');
+            if (line.sweetener && line.sweetener !== 'None') parts.push(line.sweetener);
+            if (line.toppings && line.toppings.length) parts.push('Toppings: ' + line.toppings.join(', '));
+            if (line.dippings && line.dippings.length) parts.push('Dippings: ' + line.dippings.join(', '));
+            return parts.join(' &middot; ');
+        }
+
+        // ── Render ──
+        function renderCart() {
+            const body = document.getElementById('cartBody');
+            const fab = document.getElementById('cartFab');
+            const fabCount = document.getElementById('cartFabCount');
+            const totalEl = document.getElementById('cartTotal');
+            const checkoutBtn = document.getElementById('cartCheckoutBtn');
+            const count = cartItemCount();
+
+            fabCount.textContent = count;
+            fab.classList.toggle('visible', count > 0);
+            totalEl.textContent = fmt(cartTotal());
+            checkoutBtn.disabled = count === 0;
+
+            if (cart.length === 0) {
+                body.innerHTML = '<div class="cart-empty"><div class="cart-empty-icon">&#128722;</div><p>Your cart is empty.<br>Tap the <strong>+</strong> on any menu item to add it.</p></div>';
+                return;
+            }
+
+            body.innerHTML = cart.map(line => {
+                const noteHtml = describeOptions(line);
+                return `
+                <div class="cart-line" data-cid="${line.cid}">
+                    <div class="cart-line-image" style="background:linear-gradient(135deg,${line.gradient});">${line.emoji}</div>
+                    <div class="cart-line-body">
+                        <div class="cart-line-name">${escapeHtml(line.name)}</div>
+                        ${noteHtml ? `<div class="cart-line-note">${noteHtml}</div>` : ''}
+                        <div class="cart-line-controls">
+                            <button class="qty-btn" data-act="dec" aria-label="Decrease quantity">&minus;</button>
+                            <span class="qty-val">${line.qty}</span>
+                            <button class="qty-btn" data-act="inc" aria-label="Increase quantity">+</button>
+                            <button class="cart-line-remove" data-act="rm" type="button">Remove</button>
+                        </div>
+                    </div>
+                    <div class="cart-line-price">${fmt(calcLinePrice(line))}</div>
+                </div>`;
+            }).join('');
+        }
+
+        function escapeHtml(s) {
+            return String(s).replace(/[&<>"']/g, c => ({
+                '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+            }[c]));
+        }
+
+        // ── Cart actions ──
+        function addLineToCart(line) {
+            // Try to merge if identical config exists
+            const sig = JSON.stringify({
+                id: line.id, milk: line.milk, sweetener: line.sweetener,
+                toppings: line.toppings, dippings: line.dippings
+            });
+            const existing = cart.find(l => JSON.stringify({
+                id: l.id, milk: l.milk, sweetener: l.sweetener,
+                toppings: l.toppings, dippings: l.dippings
+            }) === sig);
+            if (existing) {
+                existing.qty += line.qty;
+            } else {
+                line.cid = uid();
+                cart.push(line);
+            }
+            saveCart();
+            renderCart();
+            showToast(line.qty + ' \u00d7 ' + line.name + ' added');
+        }
+
+        function updateLineQty(cid, delta) {
+            const line = cart.find(l => l.cid === cid);
+            if (!line) return;
+            line.qty += delta;
+            if (line.qty < 1) {
+                cart = cart.filter(l => l.cid !== cid);
+            }
+            saveCart();
+            renderCart();
+        }
+
+        function removeLine(cid) {
+            cart = cart.filter(l => l.cid !== cid);
+            saveCart();
+            renderCart();
+        }
+
+        function clearCart() {
+            cart = [];
+            saveCart();
+            renderCart();
+            closeCheckout();
+        }
+
+        // ── Drawer ──
+        const cartDrawer = document.getElementById('cartDrawer');
+        const cartOverlay = document.getElementById('cartOverlay');
+
+        function openCart() {
+            cartDrawer.classList.add('open');
+            cartOverlay.classList.add('open');
+            closeCheckout();
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeCart() {
+            cartDrawer.classList.remove('open');
+            cartOverlay.classList.remove('open');
+            document.body.style.overflow = '';
+            closeCheckout();
+        }
+
+        document.getElementById('cartFab').addEventListener('click', openCart);
+        document.getElementById('cartClose').addEventListener('click', closeCart);
+        cartOverlay.addEventListener('click', closeCart);
+        document.getElementById('cartClearBtn').addEventListener('click', () => {
+            if (cart.length && confirm('Clear all items from your cart?')) clearCart();
+        });
+
+        // Cart line button clicks (delegated)
+        document.getElementById('cartBody').addEventListener('click', (e) => {
+            const btn = e.target.closest('[data-act]');
+            if (!btn) return;
+            const line = e.target.closest('.cart-line');
+            if (!line) return;
+            const cid = line.dataset.cid;
+            const act = btn.dataset.act;
+            if (act === 'inc') updateLineQty(cid, 1);
+            else if (act === 'dec') updateLineQty(cid, -1);
+            else if (act === 'rm') removeLine(cid);
+        });
+
+        // ── Customize Modal ──
+        const modalOverlay = document.getElementById('modalOverlay');
+        const modalBody = document.getElementById('modalBody');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalSubtitle = document.getElementById('modalSubtitle');
+        const modalImage = document.getElementById('modalImage');
+        const modalAddBtn = document.getElementById('modalAddBtn');
+        const modalQtyVal = document.getElementById('modalQtyVal');
+
+        function openCustomizeModal(itemEl) {
+            const data = readItemData(itemEl);
+            modalState = {
+                item: data,
+                qty: 1,
+                milk: data.type === 'drink' ? MILK_OPTIONS[0] : null,
+                sweetener: data.type === 'drink' ? SWEETENER_OPTIONS[0] : null,
+                toppings: data.type === 'pancake' ? [TOPPING_OPTIONS[0].name] : [],
+                dippings: data.type === 'pancake' ? [DIPPING_OPTIONS[0], DIPPING_OPTIONS[1]] : []
+            };
+            modalTitle.textContent = data.name;
+            modalImage.innerHTML = data.emoji;
+            modalImage.style.background = 'linear-gradient(135deg,' + data.gradient + ')';
+            modalSubtitle.textContent = 'Base ' + fmt(data.price);
+            renderModalBody();
+            updateModalAddBtn();
+            modalOverlay.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            modalOverlay.classList.remove('open');
+            modalState = null;
+            if (!cartDrawer.classList.contains('open')) {
+                document.body.style.overflow = '';
+            }
+        }
+
+        function readItemData(el) {
+            return {
+                id: el.dataset.id,
+                name: el.dataset.name,
+                price: parseFloat(el.dataset.price),
+                emoji: el.dataset.emoji,
+                gradient: el.dataset.gradient,
+                type: el.dataset.type
+            };
+        }
+
+        function renderModalBody() {
+            if (!modalState) return;
+            const t = modalState.item.type;
+            let html = '';
+
+            if (t === 'drink') {
+                html += renderChipSection('Milk', MILK_OPTIONS, [modalState.milk], 'milk', 1);
+                html += renderChipSection('Sweetener', SWEETENER_OPTIONS, [modalState.sweetener], 'sweetener', 1);
+            } else if (t === 'pancake') {
+                html += renderChipSection(
+                    'Toppings',
+                    TOPPING_OPTIONS.map(o => o.extra ? `${o.name} (+${fmt(o.extra)})` : o.name),
+                    modalState.toppings.map(n => {
+                        const def = TOPPING_OPTIONS.find(o => o.name === n);
+                        return def && def.extra ? `${def.name} (+${fmt(def.extra)})` : n;
+                    }),
+                    'toppings',
+                    null,
+                    `${PANCAKE_INCLUDED_TOPPINGS} included &middot; extras +${fmt(EXTRA_TOPPING_PRICE)} each`
+                );
+                html += renderChipSection(
+                    'Dippings',
+                    DIPPING_OPTIONS,
+                    modalState.dippings,
+                    'dippings',
+                    null,
+                    `${PANCAKE_INCLUDED_DIPPINGS} included &middot; extras +${fmt(EXTRA_TOPPING_PRICE)} each`
+                );
+            } else {
+                html = '<p style="color:var(--text-mid);font-size:0.9rem;">No customization needed for this item.</p>';
+            }
+            modalBody.innerHTML = html;
+            attachChipHandlers();
+        }
+
+        function renderChipSection(title, options, selected, fieldKey, maxSelect, hint) {
+            const hintHtml = hint ? `<span class="modal-section-hint">&nbsp;&mdash; ${hint}</span>` : '';
+            const chips = options.map(opt => {
+                const isSel = selected.includes(opt);
+                return `<button type="button" class="option-chip ${isSel ? 'selected' : ''}" data-field="${fieldKey}" data-value="${escapeHtml(opt)}" ${maxSelect ? `data-max="${maxSelect}"` : ''}>${escapeHtml(opt)}</button>`;
+            }).join('');
+            return `
+                <div class="modal-section">
+                    <div class="modal-section-title">${title}${hintHtml}</div>
+                    <div class="option-group">${chips}</div>
+                </div>`;
+        }
+
+        function attachChipHandlers() {
+            modalBody.querySelectorAll('.option-chip').forEach(chip => {
+                chip.addEventListener('click', () => {
+                    const field = chip.dataset.field;
+                    const value = chip.dataset.value;
+                    const max = chip.dataset.max ? parseInt(chip.dataset.max) : null;
+
+                    if (field === 'milk' || field === 'sweetener') {
+                        modalState[field] = value;
+                    } else if (field === 'toppings') {
+                        const baseName = value.replace(/ \(\+\$[\d.]+\)$/, '');
+                        const idx = modalState.toppings.indexOf(baseName);
+                        if (idx >= 0) modalState.toppings.splice(idx, 1);
+                        else modalState.toppings.push(baseName);
+                    } else if (field === 'dippings') {
+                        const idx = modalState.dippings.indexOf(value);
+                        if (idx >= 0) modalState.dippings.splice(idx, 1);
+                        else modalState.dippings.push(value);
+                    }
+                    renderModalBody();
+                    updateModalAddBtn();
+                });
+            });
+        }
+
+        function modalLinePrice() {
+            if (!modalState) return 0;
+            const fakeLine = {
+                price: modalState.item.price,
+                qty: modalState.qty,
+                toppings: modalState.toppings,
+                dippings: modalState.dippings
+            };
+            return calcLinePrice(fakeLine);
+        }
+
+        function updateModalAddBtn() {
+            modalQtyVal.textContent = modalState.qty;
+            modalAddBtn.textContent = `Add to Order \u2014 ${fmt(modalLinePrice())}`;
+            const t = modalState.item.type;
+            const valid = t !== 'pancake' || (modalState.toppings.length > 0 && modalState.dippings.length > 0);
+            modalAddBtn.disabled = !valid;
+        }
+
+        document.getElementById('modalClose').addEventListener('click', closeModal);
+        modalOverlay.addEventListener('click', (e) => {
+            if (e.target === modalOverlay) closeModal();
+        });
+        document.getElementById('modalQtyMinus').addEventListener('click', () => {
+            if (modalState.qty > 1) { modalState.qty--; updateModalAddBtn(); }
+        });
+        document.getElementById('modalQtyPlus').addEventListener('click', () => {
+            if (modalState.qty < 20) { modalState.qty++; updateModalAddBtn(); }
+        });
+        modalAddBtn.addEventListener('click', () => {
+            if (!modalState) return;
+            const i = modalState.item;
+            addLineToCart({
+                id: i.id,
+                name: i.name,
+                price: i.price,
+                emoji: i.emoji,
+                gradient: i.gradient,
+                qty: modalState.qty,
+                milk: modalState.milk,
+                sweetener: modalState.sweetener,
+                toppings: modalState.toppings.slice(),
+                dippings: modalState.dippings.slice()
+            });
+            closeModal();
+        });
+
+        // ── Wire Add buttons on menu items ──
+        document.querySelectorAll('.menu-item .menu-add-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const itemEl = btn.closest('.menu-item');
+                const data = readItemData(itemEl);
+                if (data.type === 'simple') {
+                    addLineToCart({
+                        id: data.id,
+                        name: data.name,
+                        price: data.price,
+                        emoji: data.emoji,
+                        gradient: data.gradient,
+                        qty: 1,
+                        milk: null,
+                        sweetener: null,
+                        toppings: [],
+                        dippings: []
+                    });
+                } else {
+                    openCustomizeModal(itemEl);
+                }
+            });
+        });
+
+        // ── Checkout ──
+        const checkoutPanel = document.getElementById('checkoutPanel');
+        const cartBody = document.getElementById('cartBody');
+        const cartFooter = document.getElementById('cartFooter');
+        const cartTitleEl = document.getElementById('cartTitle');
+
+        function openCheckout() {
+            if (cart.length === 0) return;
+            checkoutPanel.classList.add('active');
+            cartBody.style.display = 'none';
+            cartFooter.style.display = 'none';
+            cartTitleEl.textContent = 'Checkout';
+            renderCheckoutSummary();
+        }
+
+        function closeCheckout() {
+            checkoutPanel.classList.remove('active');
+            cartBody.style.display = '';
+            cartFooter.style.display = '';
+            cartTitleEl.textContent = 'Your Order';
+        }
+
+        function renderCheckoutSummary() {
+            const sum = document.getElementById('checkoutSummary');
+            const rows = cart.map(line => {
+                const opts = describeOptions(line).replace(/&middot;/g, '·');
+                return `<div class="checkout-summary-row"><span>${line.qty}\u00d7 ${escapeHtml(line.name)}${opts ? ' <em style=\"color:var(--text-mid);font-style:normal;font-size:0.78rem;\">(' + opts + ')</em>' : ''}</span><span>${fmt(calcLinePrice(line))}</span></div>`;
+            }).join('');
+            sum.innerHTML = rows + `<div class="checkout-summary-row"><span>Total</span><span>${fmt(cartTotal())}</span></div>`;
+        }
+
+        document.getElementById('cartCheckoutBtn').addEventListener('click', openCheckout);
+        document.getElementById('checkoutBack').addEventListener('click', closeCheckout);
+
+        document.getElementById('checkoutForm').addEventListener('submit', () => {
+            // Build a plain-text summary the kitchen can read in the email
+            const lines = cart.map(line => {
+                const opts = describeOptions(line).replace(/&middot;/g, '·').replace(/<[^>]+>/g, '');
+                return `${line.qty} x ${line.name}${opts ? ' [' + opts + ']' : ''} - ${fmt(calcLinePrice(line))}`;
+            });
+            document.getElementById('orderSummaryField').value = lines.join('\n');
+            document.getElementById('orderTotalField').value = fmt(cartTotal());
+            // Clear cart after a brief delay so the form actually submits
+            setTimeout(() => {
+                clearCart();
+            }, 400);
+        });
+
+        // Esc key closes overlays
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                if (modalOverlay.classList.contains('open')) closeModal();
+                else if (cartDrawer.classList.contains('open')) closeCart();
+            }
+        });
+
+        // Initial render
+        renderCart();
     </script>
 </body>
 </html>
